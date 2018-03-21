@@ -5,7 +5,6 @@ const methodOverride = require("method-override");
 const bodyParser = require("body-parser");
 const path = require("path");
 const exphbs = require("express-handlebars");
-const routes = require("./routes/index");
 
 // Express and Port
 const app = express();
@@ -26,7 +25,8 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Routes
-app.use("/", routes);
+require("./routes/index")(app);
+require("./routes/view/view-routes")(app);
 
 // Start server
 app.listen(port, () => {

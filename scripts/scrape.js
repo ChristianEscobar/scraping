@@ -3,12 +3,15 @@ const request = require("request");
 
 const url = "https://gizmodo.com/"
 
-request(url, function(error, response, html) {
+module.exports.scrape = request(url, function(error, response, html) {
 	// Load the HTML into cheerio and save it to a variable
   const $ = cheerio.load(html);
 
   // An empty array to save the data that we'll scrape
   const articles = [];
+
+  // An empty object used to return results for Handlebars
+  let resultsObj = {};
 
   // Select HTML tags
   $("h1.headline").each(function(i, element) {
@@ -31,5 +34,7 @@ request(url, function(error, response, html) {
     });
   });
 
-  console.log(results);
+  resultsObj.articles = articles;
+
+  return resultsObj;
 });
