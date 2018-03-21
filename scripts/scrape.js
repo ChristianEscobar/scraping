@@ -8,7 +8,7 @@ request(url, function(error, response, html) {
   const $ = cheerio.load(html);
 
   // An empty array to save the data that we'll scrape
-  const results = [];
+  const articles = [];
 
   // Select HTML tags
   $("h1.headline").each(function(i, element) {
@@ -24,7 +24,7 @@ request(url, function(error, response, html) {
     const summary = $(element).parent().siblings("div.item__content").children("div.entry-summary").text();
     
     // Save article data
-    results.push({
+    articles.push({
       headline: headline,
       summary: summary,
       link: link

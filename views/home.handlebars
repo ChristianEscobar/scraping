@@ -6,3 +6,14 @@
     <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
   </div>
 </div>
+
+{{ #each article }}
+	<div class="card">
+	  <h5 class="card-header">{{ this.headline }}</h5>
+	  <div class="card-body">
+	    <!--<h5 class="card-title">Special title treatment</h5>-->
+	    <p class="card-text">{{ this.summary }}</p>
+	    <a href="#" class="btn btn-primary">Go somewhere</a>
+	  </div>
+	</div>
+{{ /each }}
