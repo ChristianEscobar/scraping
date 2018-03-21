@@ -4,10 +4,12 @@
 }
 
 #logo-overlay {
-	font-family: 'Mrs Sheppards', cursive;
-	font-size: 185%;
+	font-family: 'Rock Salt', cursive;
+	font-size: 100%;
+	font-weight: bold;
 	color: red;
 	position: absolute;
-	left: 65px;
-	top: -5px;
+	left: 60px;
+	top: 5px;
+	text-shadow: 2px 2px 5px black;
 }
