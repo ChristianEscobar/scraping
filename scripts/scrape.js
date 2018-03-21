@@ -17,15 +17,16 @@ request(url, function(error, response, html) {
 
     // Skip over ads
     if(link.startsWith("https://deals.kinja.co")) {
-    	console.log("SKIPPED", link);
     	return true;
     }
 
-    const title = $(element).children().text();
+    const headline = $(element).children().text();
+    const summary = $(element).parent().siblings("div.item__content").children("div.entry-summary").text();
     
     // Save article data
     results.push({
-      title: title,
+      headline: headline,
+      summary: summary,
       link: link
     });
   });

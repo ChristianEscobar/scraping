@@ -1,0 +1,13 @@
+#logo {
+	width: auto;
+	height: 20px;
+}
+
+#logo-overlay {
+	font-family: 'Mrs Sheppards', cursive;
+	font-size: 185%;
+	color: red;
+	position: absolute;
+	left: 65px;
+	top: -5px;
+}
