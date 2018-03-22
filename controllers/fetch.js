@@ -7,8 +7,6 @@ module.exports.scrape = function(req, res) {
 
 	// Callback function passed to scrape method
 	const scrapeCallbackFn = function scrapeCallback(articles) {
-		console.log("About to return!!!", articles);
-
 		res.render("home", articles);
 	}
 
