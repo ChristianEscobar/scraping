@@ -1,5 +1,8 @@
 $("#scrape-btn").on("click", function(event) {
 	event.preventDefault();
 
-	console.log("Scraping!");
+	$.get("/api/scrape")
+	.then((data) => {
+		console.log(data);
+	});
 });

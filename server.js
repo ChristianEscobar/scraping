@@ -5,6 +5,10 @@ const methodOverride = require("method-override");
 const bodyParser = require("body-parser");
 const path = require("path");
 const exphbs = require("express-handlebars");
+const apiRoutes = require("./routes/api/api-routes");
+const viewRoutes = require("./routes/view/view-routes");
+const indexRoutes = require("./routes/index");
+const mongoose = require("mongoose");
 
 // Express and Port
 const app = express();
@@ -20,13 +24,19 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // Override with POST having ?_method=DELETE
 app.use(methodOverride("_method"));
 
+// Use mongoose Promises
+// Connect to the database
+mongoose.Promise = Promise;
+mongoose.connect("mongodb://localhost/headlines-scraping");
+
 // Set Handlebars.
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Routes
-require("./routes/index")(app);
-require("./routes/view/view-routes")(app);
+app.use("/", apiRoutes);
+app.use("/", viewRoutes);
+app.use("/", indexRoutes);
 
 // Start server
 app.listen(port, () => {

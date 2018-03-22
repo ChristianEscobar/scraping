@@ -1,40 +1,52 @@
 const cheerio = require("cheerio");
 const request = require("request");
+// Load Mongo Models
+const models = require("../models");
+const mongoose = require("mongoose");
 
 const url = "https://gizmodo.com/"
 
-module.exports.scrape = request(url, function(error, response, html) {
-	// Load the HTML into cheerio and save it to a variable
-  const $ = cheerio.load(html);
+module.exports.execute = function(callbackFn) {
 
-  // An empty array to save the data that we'll scrape
-  const articles = [];
+  // Request call to url
+  request(url, function(error, response, html) {
+    console.log("Starting scrape for new articles");
 
-  // An empty object used to return results for Handlebars
-  let resultsObj = {};
+  	// Load the HTML into cheerio and save it to a variable
+    const $ = cheerio.load(html);
 
-  // Select HTML tags
-  $("h1.headline").each(function(i, element) {
+    console.log(models);
 
-    const link = $(element).children("a").attr("href");
+    // Select HTML tags
+    $("h1.headline").each(function(i, element) {
 
-    // Skip over ads
-    if(link.startsWith("https://deals.kinja.co")) {
-    	return true;
-    }
+      const link = $(element).children("a").attr("href");
 
-    const headline = $(element).children().text();
-    const summary = $(element).parent().siblings("div.item__content").children("div.entry-summary").text();
-    
-    // Save article data
-    articles.push({
-      headline: headline,
-      summary: summary,
-      link: link
+      console.log("link", link);
+
+      // Skip over ads
+      if(link.startsWith("https://deals.kinja.co")) {
+      	return true;
+      }
+
+      const headline = $(element).children().text();
+      const summary = $(element).parent().siblings("div.item__content").children("div.entry-summary").text();
+      
+      // Save article data to the database
+      const article = {
+        headline: headline,
+        summary: summary,
+        link: link
+      }
+
+      models.Headline.create(article)
+      .then((dbArticle) => {
+        console.log("article saved!");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+      
     });
   });
-
-  resultsObj.articles = articles;
-
-  return resultsObj;
-});
+}
