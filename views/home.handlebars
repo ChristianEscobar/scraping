@@ -7,6 +7,33 @@
   </div>
 </div>
 
+<div id="articles-div">
+  {{#if articles}}
+    {{#each articles}}
+      <div class="card">
+        <div class="card-header">
+          <h5 id="article-title">{{ this.headline }}</h5>
+          <a href="#" id="article-save" class="btn btn-success">Save Article</a>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{ this.summary }}</p>
+        </div>
+      </div>
+
+      <br>
+    {{/each}}
+  {{ else }}
+    <div class="card">
+      <div class="card-header">
+        <h5 id="article-title">No Articles Found</h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text">No articles were found in the database.  Try scraping for new articles.</p>
+      </div>
+    </div>
+  {{/if}}
+</div>
+
 <!-- Modal -->
 <div class="modal fade" id="articlesAddedModal" tabindex="-1" role="dialog" aria-labelledby="articlesAddedModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

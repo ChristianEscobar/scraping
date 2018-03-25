@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const models = require("../models");
 
 module.exports.headlines = function(req, res) {
-	return models.Headline.find({})
+	models.Headline.find({})
 	.then((dbHeadlines) => {
 
 		const headlinesObj = {
-			headlines: dbHeadlines
+			articles: dbHeadlines
 		}
 
 		res.render("home", headlinesObj);

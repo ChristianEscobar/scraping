@@ -5,6 +5,6 @@ const headlinesController = require("../../controllers/headline");
 
 router.post("/api/scrape", fetchController.scrape);
 
-router.get("/api/headlines", headlinesController.headlines)
+router.get("/api/articles", headlinesController.headlines)
 
 module.exports = router;
