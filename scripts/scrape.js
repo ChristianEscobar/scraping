@@ -15,14 +15,12 @@ module.exports.execute = function(callbackFn) {
   	// Load the HTML into cheerio and save it to a variable
     const $ = cheerio.load(html);
 
-    console.log(models);
+    const articles = [];
 
     // Select HTML tags
     $("h1.headline").each(function(i, element) {
 
       const link = $(element).children("a").attr("href");
-
-      console.log("link", link);
 
       // Skip over ads
       if(link.startsWith("https://deals.kinja.co")) {
@@ -39,14 +37,18 @@ module.exports.execute = function(callbackFn) {
         link: link
       }
 
-      models.Headline.create(article)
-      .then((dbArticle) => {
-        console.log("article saved!");
+      articles.push(article);
+      
+    });
+
+    models.Headline.create(articles)
+      .then((dbArticles) => {
+        console.log("Articles saved!");
+        
+        callbackFn({articles: dbArticles});
       })
       .catch((error) => {
         console.error(error);
-      });
-      
-    });
+      });  
   });
 }

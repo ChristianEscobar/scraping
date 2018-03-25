@@ -6,26 +6,3 @@
     <p class="lead">Home Page</p>
   </div>
 </div>
-
-{{#if headlines}}
-	{{#each headlines}}
-		<div class="card">
-			<div class="card-header">
-		  	<h5 id="article-title">{{ this.headline }}</h5>
-		  	<a href="#" id="article-save" class="btn btn-success">Save Article</a>
-		  </div>
-		  <div class="card-body">
-		    <p class="card-text">{{ this.summary }}</p>
-		  </div>
-		</div>
-
-		<br>
-	{{/each}}
-{{else}}
-	<div class="card">
-		<div class="card-header">
-		  <h5 id="article-title">No Articles</h5>
-		</div>
-	</div>
-
-{{/if}}
