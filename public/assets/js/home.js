@@ -26,6 +26,11 @@ $("#scrape-btn").on("click", function(event) {
 
 		// Append the rendered results to the home page
 		$("body").append(renderArticles(articles));
+
+		// Update modal body text
+		$("#articles-added").text( `${articles.articles.length} articles added` );
+
+		$("#articlesAddedModal").modal("show");
 	})
 	.catch( error => console.error(error));
 });
