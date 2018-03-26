@@ -8,7 +8,7 @@ const exphbs = require("express-handlebars");
 const apiRoutes = require("./routes/api/api-routes");
 const viewRoutes = require("./routes/view/view-routes");
 const indexRoutes = require("./routes/index");
-const mongoose = require("mongoose");
+const mongoose = require("mongoose").set('debug', false);
 
 // Express and Port
 const app = express();

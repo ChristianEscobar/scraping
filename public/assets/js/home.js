@@ -1,18 +1,18 @@
 // Handlebars template for articles
 const articlesTemplate = `
 	{{#each articles}}
-		<div class="card">
-			<div class="card-header">
-		  	<h5 id="article-title">{{ this.headline }}</h5>
-		  	<a href="#" id="article-save" class="btn btn-success">Save Article</a>
-		  </div>
-		  <div class="card-body">
-		    <p class="card-text">{{ this.summary }}</p>
-		  </div>
-		</div>
+  	<div class="card">
+      <div class="card-header">
+        <a href={{ this.link }} target="_blank"><h5 id="article-title">{{ this.headline }}</h5></a>
+        <button class="article-save-btn btn btn-success" data-id={{ this._id }}>Save Article</button>
+      </div>
+      <div class="card-body">
+        <p class="card-text">{{ this.summary }}</p>
+      </div>
+    </div>
 
-		<br>
-	{{/each}}`;
+    <br>
+  {{/each}}`;
 
 const noArticlesTemplate = `
 	<div class="card">
@@ -25,6 +25,14 @@ const noArticlesTemplate = `
 	</div>
 `;
 
+const renderArticles = articles => {
+	// Compile the articles templates
+	const renderArticles = Handlebars.compile(articlesTemplate);
+
+	// Append the rendered results to the home page
+	$("#articles-div").html(renderArticles(articles));
+}
+
 // Listener for scrape articles button
 $("#scrape-btn").on("click", function(event) {
 	event.preventDefault();
@@ -33,12 +41,7 @@ $("#scrape-btn").on("click", function(event) {
 	.then( articles => {
 
 		if(articles.articles.length > 0) {
-			// Compile the articles templates
-			const renderArticles = Handlebars.compile(articlesTemplate);
-
-
-			// Append the rendered results to the home page
-			$("#articles-div").html(renderArticles(articles));
+			renderArticles(articles);
 		} 
 
 		// Update modal body text
@@ -51,8 +54,15 @@ $("#scrape-btn").on("click", function(event) {
 });
 
 // Listener for save article
-$("#article-save").on("click", function(event) {
-	console.log("save...");
+$(document).on("click", ".article-save-btn", function(event) {
+	event.preventDefault();
+
+	const articleId = $(this).attr("data-id");
+
+	$.post("/api/articles/", {id: articleId})
+	.then( saveResults => {
+		renderArticles(saveResults);
+	});
 });
 
 // Page load listener used to load existing articles

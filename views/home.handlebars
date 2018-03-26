@@ -12,8 +12,8 @@
     {{#each articles}}
       <div class="card">
         <div class="card-header">
-          <h5 id="article-title">{{ this.headline }}</h5>
-          <a href="#" id="article-save" class="btn btn-success">Save Article</a>
+          <a href={{ this.link }} target="_blank"><h5 id="article-title">{{ this.headline }}</h5></a>
+          <button class="article-save-btn btn btn-success" data-id={{ this._id }}>Save Article</button>
         </div>
         <div class="card-body">
           <p class="card-text">{{ this.summary }}</p>
