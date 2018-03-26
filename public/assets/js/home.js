@@ -39,14 +39,20 @@ $("#scrape-btn").on("click", function(event) {
 
 			// Append the rendered results to the home page
 			$("#articles-div").html(renderArticles(articles));
+		} 
 
-			// Update modal body text
-			$("#articles-added").text( `${articles.articles.length} articles added` );
+		// Update modal body text
+		$("#articles-added").text( (articles.articles.length > 0) ? `${articles.articles.length} articles added.` : `No new articles found.` );
 
-			$("#articlesAddedModal").modal("show");
-		}
+		// Display modal
+		$("#articlesAddedModal").modal("show");
 	})
 	.catch( error => console.error(error));
+});
+
+// Listener for save article
+$("#article-save").on("click", function(event) {
+	console.log("save...");
 });
 
 // Page load listener used to load existing articles

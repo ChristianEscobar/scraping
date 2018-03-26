@@ -12,7 +12,7 @@ module.exports.execute = function(callbackFn) {
   request(url, function(error, response, html) {
     console.log("Starting scrape for new articles");
 
-  	// Load the HTML into cheerio and save it to a variable
+    // Load the HTML into cheerio and save it to a variable
     const $ = cheerio.load(html);
 
     const articles = [];
@@ -24,7 +24,7 @@ module.exports.execute = function(callbackFn) {
 
       // Skip over ads
       if(link.startsWith("https://deals.kinja.co")) {
-      	return true;
+        return true;
       }
 
       const headline = $(element).children().text();

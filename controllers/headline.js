@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const models = require("../models");
 
-module.exports.headlines = function(req, res) {
+module.exports.getHeadlines = function(req, res) {
 	models.Headline.find({})
 	.then((dbHeadlines) => {
 
@@ -11,4 +11,8 @@ module.exports.headlines = function(req, res) {
 
 		res.render("home", headlinesObj);
 	});
+}
+
+module.exports.saveHeadline = function(req, res) {
+	
 }
