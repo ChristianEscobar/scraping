@@ -29,3 +29,18 @@
 	resize: none;
 	overflow: auto;
 }
+
+.gizmodo-bg {
+	background-size: cover;
+	background-image: url(../images/background-img.jpg);
+	background-repeat: no-repeat;
+}
+
+.jumbotron {
+	color: white;
+	font-weight: bold;
+}
+
+.headlines-text {
+	font-family: 'Rock Salt', cursive;
+}
