@@ -34,14 +34,21 @@ $(document).on("click", ".article-delete-btn", function(event) {
 $(document).on("click", ".article-notes-btn", function(event) {
   const articleId = $(this).attr("data-id");
 
-  // Set note title
-  $("#modal-title").text( `Notes for article ${articleId}` );
+  console.log(articleId);
 
-  // Set article id attribute
-  $("#save-note-btn").attr("data-id", articleId);
+  $.get("/api/notes/articles/" + articleId)
+  .then( articleNotes => {
+    console.log(articleNotes);
 
-  // Display modal
-  $("#articleNotesModal").modal("show");
+    // Set note title
+    $("#modal-title").text( `Notes for article ${articleId}` );
+
+    // Set article id attribute
+    $("#save-note-btn").attr("data-id", articleId);
+
+    // Display modal
+    $("#articleNotesModal").modal("show");
+  });
 });
 
 // Listener for saving notes

@@ -22,4 +22,7 @@ router.delete("/api/save/articles/:id?", headlinesController.deleteSavedHeadline
 // Save article note
 router.post("/api/notes/articles/:id?", notesController.saveNote);
 
+// Get notes for article
+router.get("/api/notes/articles/:id?", notesController.getNotes);
+
 module.exports = router;
