@@ -15,7 +15,7 @@ module.exports.getHeadlines = function(req, res) {
 
 module.exports.saveHeadlines = function(req, res) {
 	// First, find the article
-	models.Headline.findById(req.body.id)
+	models.Headline.findById(req.params.id)
 	.then( article => {
 
 		// Create object to insert
@@ -31,7 +31,7 @@ module.exports.saveHeadlines = function(req, res) {
 	})
 	.then( savedArticle => {
 		// Finally, remove it from the Headline collection
-		return models.Headline.findByIdAndRemove(req.body.id)
+		return models.Headline.findByIdAndRemove(req.params.id)
 	})
 	.then( removeResults => {
 		return models.Headline.find({});
@@ -58,7 +58,7 @@ module.exports.getSavedHeadlines = function(req, res) {
 
 module.exports.deleteSavedHeadlines = function(req, res) {
 
-	models.Save.findByIdAndRemove(req.body.id)
+	models.Save.findByIdAndRemove(req.params.id)
 	.then(removeResults => {
 		return models.Save.find({});
 	})

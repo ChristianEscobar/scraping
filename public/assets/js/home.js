@@ -59,7 +59,7 @@ $(document).on("click", ".article-save-btn", function(event) {
 
 	const articleId = $(this).attr("data-id");
 
-	$.post("/api/save/articles", {id: articleId})
+	$.post("/api/save/articles/" + articleId)
 	.then( saveResults => {
 		renderArticles(saveResults, articlesTemplate, "articles-div");
 	});

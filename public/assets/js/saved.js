@@ -22,9 +22,8 @@ $(document).on("click", ".article-delete-btn", function(event) {
   const articleId = $(this).attr("data-id");
 
   $.ajax({
-    url: "/api/save/articles",
-    method: "DELETE",
-    data: {id : articleId}
+    url: "/api/save/articles/" + articleId,
+    method: "DELETE"
   })
   .done( deleteResults => {
     renderArticles(deleteResults, savedArticlesTemplate, "saved-articles-div");
