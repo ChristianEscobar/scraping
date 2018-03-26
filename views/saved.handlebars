@@ -37,20 +37,20 @@
 </div>
 
 <!-- Modal for Notes -->
-<div class="modal fade" id="articleNotesModal" tabindex="-1" role="dialog" aria-labelledby="articleNotes" aria-hidden="true">
+<div class="modal fade" id="articleNotesModal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="articleNotes">Notes for article </h5>
+        <h5 class="modal-title" id="modal-title">Notes for article</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <textarea class="form-control" id="message-text" placeholder="New Note"></textarea>
+        <textarea class="form-control" id="note-text" placeholder="New Note"></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Save Note</button>
+        <button id="save-note-btn" type="button" class="btn btn-success" data-dismiss="modal">Save Note</button>
       </div>
     </div>
   </div>

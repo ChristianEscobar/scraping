@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const fetchController = require("../../controllers/fetch");
 const headlinesController = require("../../controllers/headline");
+const notesController = require("../../controllers/note");
 
 // Scrape for new articles
 router.post("/api/scrape", fetchController.scrape);
@@ -17,5 +18,8 @@ router.post("/api/save/articles/:id?", headlinesController.saveHeadlines);
 
 // Delete saved article
 router.delete("/api/save/articles/:id?", headlinesController.deleteSavedHeadlines);
+
+// Save article note
+router.post("/api/notes/articles/:id?", notesController.saveNote);
 
 module.exports = router;

@@ -15,6 +15,7 @@ const savedArticlesTemplate = `
     <br>
   {{/each}}`;
 
+// Listener for removing saved articles
 $(document).on("click", ".article-delete-btn", function(event) {
   event.preventDefault();
 
@@ -30,11 +31,31 @@ $(document).on("click", ".article-delete-btn", function(event) {
   });
 });
 
+// Listener for adding notes
 $(document).on("click", ".article-notes-btn", function(event) {
   const articleId = $(this).attr("data-id");
 
-  $(".modal-title").text( `Notes for article ${articleId}` );
+  // Set note title
+  $("#modal-title").text( `Notes for article ${articleId}` );
+
+  // Set article id attribute
+  $("#save-note-btn").attr("data-id", articleId);
 
   // Display modal
   $("#articleNotesModal").modal("show");
 });
+
+// Listener for saving notes
+$("#save-note-btn").on("click", function(event) {
+  const articleId = $(this).attr("data-id");
+
+  const noteText = $("#note-text").val();
+
+  const noteTitle = $("#modal-title").text();
+
+  $.post("/api/notes/articles/" + articleId, {title: noteTitle, body: noteText})
+  .then( noteSaveResults => {
+    console.log(noteSaveResults);
+  });
+})
+
