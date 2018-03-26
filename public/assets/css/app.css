@@ -15,5 +15,17 @@
 }
 
 .article-delete-btn {
-	float:right;
+	float: right;
+}
+
+.article-notes-btn {
+	float: right;
+	margin-left: 5px;
+}
+
+#message-text {
+	width: 470px;
+	height: 250px;
+	resize: none;
+	overflow: auto;
 }

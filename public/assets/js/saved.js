@@ -4,6 +4,7 @@ const savedArticlesTemplate = `
     <div class="card">
       <div class="card-header">
         <a href={{ this.link }} target="_blank"><h5 id="article-title">{{ this.headline }}</h5></a>
+        <button class="article-notes-btn btn btn-success" data-id={{ this._id }}>Article Notes</button>
         <button class="article-delete-btn btn btn-success" data-id={{ this._id }}>Delete From Saved</button>
       </div>
       <div class="card-body">
@@ -27,4 +28,13 @@ $(document).on("click", ".article-delete-btn", function(event) {
   .done( deleteResults => {
     renderArticles(deleteResults, savedArticlesTemplate, "saved-articles-div");
   });
+});
+
+$(document).on("click", ".article-notes-btn", function(event) {
+  const articleId = $(this).attr("data-id");
+
+  $(".modal-title").text( `Notes for article ${articleId}` );
+
+  // Display modal
+  $("#articleNotesModal").modal("show");
 });

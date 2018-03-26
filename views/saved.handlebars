@@ -14,7 +14,8 @@
       <div class="card">
         <div class="card-header">
           <a href={{ this.link }} target="_blank"><h5 id="article-title">{{ this.headline }}</h5></a>
-          <button class="article-delete-btn btn btn-success" data-id={{ this._id }}>Delete From Saved</button>
+          <button class="article-notes-btn btn btn-warning" data-id={{ this._id }}>Article Notes</button>
+          <button class="article-delete-btn btn btn-info" data-id={{ this._id }}>Delete From Saved</button>
         </div>
         <div class="card-body">
           <p class="card-text">{{ this.summary }}</p>
@@ -33,5 +34,25 @@
       </div>
     </div>
   {{/if}}
+</div>
+
+<!-- Modal for Notes -->
+<div class="modal fade" id="articleNotesModal" tabindex="-1" role="dialog" aria-labelledby="articleNotes" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="articleNotes">Notes for article </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control" id="message-text" placeholder="New Note"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Save Note</button>
+      </div>
+    </div>
+  </div>
 </div>
 
