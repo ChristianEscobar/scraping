@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const headlinesController = require("../../controllers/headline");
 
-router.get("/saved", function(req, res) {
-		res.render("saved");
-});
+router.get("/saved", headlinesController.getSavedHeadlines);
 
 module.exports = router;

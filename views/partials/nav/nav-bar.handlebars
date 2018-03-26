@@ -10,7 +10,9 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link {{#if home-active}} active {{/if}}" href="/">Home {{#if home-active}} <span class="sr-only">(current)</span> {{/if}}</a>
       <a class="nav-item nav-link {{#if saved-active}} active {{/if}}" href="/saved">Saved Articles {{#if saved-active}} <span class="sr-only">(current)</span> {{/if}}</a>
-      <button type="button" id="scrape-btn" class="btn btn-danger">Scrape New Articles!</button>
+      {{#if home-active}}
+        <button type="button" id="scrape-btn" class="btn btn-danger">Scrape New Articles!</button>
+      {{/if}}
     </div>
   </div>
 </nav>

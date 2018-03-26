@@ -25,12 +25,12 @@ const noArticlesTemplate = `
 	</div>
 `;
 
-const renderArticles = articles => {
+const renderArticles = (articles, template, articleDivName) => {
 	// Compile the articles templates
-	const renderArticles = Handlebars.compile(articlesTemplate);
+	const renderArticles = Handlebars.compile(template);
 
 	// Append the rendered results to the home page
-	$("#articles-div").html(renderArticles(articles));
+	$("#" + articleDivName).html(renderArticles(articles));
 }
 
 // Listener for scrape articles button
@@ -41,11 +41,11 @@ $("#scrape-btn").on("click", function(event) {
 	.then( articles => {
 
 		if(articles.articles.length > 0) {
-			renderArticles(articles);
+			renderArticles(articles, articlesTemplate, "articles-div");
 		} 
 
 		// Update modal body text
-		$("#articles-added").text( (articles.articles.length > 0) ? `${articles.articles.length} articles added.` : `No new articles found.` );
+		$("#modal-body-text").text( (articles.articles.length > 0) ? `${articles.articles.length} articles added.` : `No new articles found.` );
 
 		// Display modal
 		$("#articlesAddedModal").modal("show");
@@ -59,11 +59,11 @@ $(document).on("click", ".article-save-btn", function(event) {
 
 	const articleId = $(this).attr("data-id");
 
-	$.post("/api/articles/", {id: articleId})
+	$.post("/api/save/articles", {id: articleId})
 	.then( saveResults => {
-		renderArticles(saveResults);
+		renderArticles(saveResults, articlesTemplate, "articles-div");
 	});
 });
 
 // Page load listener used to load existing articles
-$.getJSON("/api/articles", data => console.log("completed"));
+//$.getJSON("/api/articles", data => console.log("completed"));

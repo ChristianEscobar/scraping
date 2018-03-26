@@ -9,7 +9,13 @@ router.post("/api/scrape", fetchController.scrape);
 // Get articles
 router.get("/api/articles", headlinesController.getHeadlines);
 
+// Get saved articles
+router.get("/api/save/articles", headlinesController.getSavedHeadlines);
+
 // Save articles
-router.post("/api/articles/:id?", headlinesController.saveHeadlines);
+router.post("/api/save/articles/:id?", headlinesController.saveHeadlines);
+
+// Delete saved article
+router.delete("/api/save/articles/:id?", headlinesController.deleteSavedHeadlines);
 
 module.exports = router;

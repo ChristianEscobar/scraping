@@ -7,3 +7,30 @@
     <p class="lead">Saved Articles Page</p>
   </div>
 </div>
+
+<div id="saved-articles-div">
+  {{#if articles}}
+    {{#each articles}}
+      <div class="card">
+        <div class="card-header">
+          <a href={{ this.link }} target="_blank"><h5 id="article-title">{{ this.headline }}</h5></a>
+          <button class="article-delete-btn btn btn-success" data-id={{ this._id }}>Delete From Saved</button>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{ this.summary }}</p>
+        </div>
+      </div>
+
+      <br>
+    {{/each}}
+  {{ else }}
+    <div class="card">
+      <div class="card-header">
+        <h5 id="article-title">No Articles Found</h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text">There are no saved articles.</p>
+      </div>
+    </div>
+  {{/if}}
+</div>

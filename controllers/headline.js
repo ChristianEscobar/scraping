@@ -3,7 +3,7 @@ const models = require("../models");
 
 module.exports.getHeadlines = function(req, res) {
 	models.Headline.find({})
-	.then((dbHeadlines) => {
+	.then( dbHeadlines => {
 
 		const headlinesObj = {
 			articles: dbHeadlines
@@ -41,4 +41,34 @@ module.exports.saveHeadlines = function(req, res) {
 		res.json( {articles: allResults} );
 	})
 	.catch( error => console.error(error));
+}
+
+module.exports.getSavedHeadlines = function(req, res) {
+	models.Save.find({})
+	.then( dbHeadlines => {
+		
+		const headlinesObj = {
+			articles: dbHeadlines
+		}
+
+		res.render("saved", headlinesObj); 
+	})
+	.catch( error => console.error(error));
+}
+
+module.exports.deleteSavedHeadlines = function(req, res) {
+
+	models.Save.findByIdAndRemove(req.body.id)
+	.then(removeResults => {
+		return models.Save.find({});
+	})
+	.then( findResults => {
+		const headlinesObj = {
+			articles: findResults
+		}
+
+		res.json(headlinesObj);
+	})
+	.catch( error => console.error(error));
+
 }
