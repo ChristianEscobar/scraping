@@ -25,3 +25,7 @@ The application uses MongoDB to store the scraped headlines, saved headlines as 
 * [body-parser](https://www.npmjs.com/package/body-parser)
 * [cheerio](https://www.npmjs.com/package/cheerio)
 * [request](https://www.npmjs.com/package/request)
+
+# Sample Screenshots
+![Home Page](public/assets/images/github/home-page.png)
+![Saved Articles Page](public/assets/images/github/saved-articles.png)
