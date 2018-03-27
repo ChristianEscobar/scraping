@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const models = require("../models");
 
-module.exports.saveNote = function(req, res) {
+module.exports.saveNotes = function(req, res) {
 
 	models.Note.create(req.body)
 	.then( savedNote => {
@@ -22,4 +22,13 @@ module.exports.getNotes = function(req, res) {
 		console.log("==>", articleWithNotes);
 		res.json(articleWithNotes);
 	});
+}
+
+module.exports.deleteNotes = function(req, res) {
+
+	models.Note.remove({_id: req.params.id})
+	.then( deleteResults => {
+		res.json(deleteResults);
+	})
+	.catch( error => console.error(error));
 }

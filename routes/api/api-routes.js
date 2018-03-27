@@ -20,9 +20,12 @@ router.post("/api/save/articles/:id?", headlinesController.saveHeadlines);
 router.delete("/api/save/articles/:id?", headlinesController.deleteSavedHeadlines);
 
 // Save article note
-router.post("/api/notes/articles/:id?", notesController.saveNote);
+router.post("/api/notes/articles/:id?", notesController.saveNotes);
 
 // Get notes for article
 router.get("/api/notes/articles/:id?", notesController.getNotes);
+
+// Delete note
+router.delete("/api/notes/:id?", notesController.deleteNotes)
 
 module.exports = router;

@@ -5,7 +5,7 @@ const savedArticlesTemplate = `
       <div class="card-header">
         <a href={{ this.link }} target="_blank"><h5 id="article-title">{{ this.headline }}</h5></a>
         <button class="article-notes-btn btn btn-success" data-id={{ this._id }}>Article Notes</button>
-        <button class="article-delete-btn btn btn-success" data-id={{ this._id }}>Delete From Saved</button>
+        <button class="article-delete-btn btn btn-success" data-id={{ this._id }} article-id={{ this.articleId }}>Delete From Saved</button>
       </div>
       <div class="card-body">
         <p class="card-text">{{ this.summary }}</p>
@@ -13,7 +13,19 @@ const savedArticlesTemplate = `
     </div>
 
     <br>
-  {{/each}}`;
+  {{/each}}
+`;
+
+const articleNotesTemplate = `
+  {{#each note}}
+    <div class="card">
+      <div class="card-body">
+        {{ this.body }}
+        <button class="note-delete-btn btn btn-danger" data-id={{ this._id }}>&times;</button> 
+      </div>
+    </div>
+  {{/each}}
+`;
 
 // Listener for removing saved articles
 $(document).on("click", ".article-delete-btn", function(event) {
@@ -26,7 +38,7 @@ $(document).on("click", ".article-delete-btn", function(event) {
     method: "DELETE"
   })
   .done( deleteResults => {
-    renderArticles(deleteResults, savedArticlesTemplate, "saved-articles-div");
+    renderData(deleteResults, savedArticlesTemplate, "saved-articles-div");
   });
 });
 
@@ -34,17 +46,18 @@ $(document).on("click", ".article-delete-btn", function(event) {
 $(document).on("click", ".article-notes-btn", function(event) {
   const articleId = $(this).attr("data-id");
 
-  console.log(articleId);
 
   $.get("/api/notes/articles/" + articleId)
   .then( articleNotes => {
-    console.log(articleNotes);
 
     // Set note title
     $("#modal-title").text( `Notes for article ${articleId}` );
 
     // Set article id attribute
     $("#save-note-btn").attr("data-id", articleId);
+
+    // Display existing notes
+    renderData(articleNotes, articleNotesTemplate, "", "article-notes");
 
     // Display modal
     $("#articleNotesModal").modal("show");
@@ -61,7 +74,22 @@ $("#save-note-btn").on("click", function(event) {
 
   $.post("/api/notes/articles/" + articleId, {title: noteTitle, body: noteText})
   .then( noteSaveResults => {
-    console.log(noteSaveResults);
+
+    // Clear note text in modal just incase
+    $("#note-text").val("");
   });
 })
 
+$(document).on("click", ".note-delete-btn", function(event) {
+  event.preventDefault();
+
+  const noteId = $(this).attr("data-id");
+
+  $.ajax({
+    url: "/api/notes/" + noteId,
+    method: "DELETE"
+  })
+  .done( deleteResults => {
+    $(this).parent().remove()
+  });
+})

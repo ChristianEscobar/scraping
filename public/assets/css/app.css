@@ -44,3 +44,7 @@
 .headlines-text {
 	font-family: 'Rock Salt', cursive;
 }
+
+.note-delete-btn {
+	float: right;
+}

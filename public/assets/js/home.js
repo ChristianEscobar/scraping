@@ -25,12 +25,17 @@ const noArticlesTemplate = `
 	</div>
 `;
 
-const renderArticles = (articles, template, articleDivName) => {
+const renderData = (data, template, divIdName, divClassName) => {
 	// Compile the articles templates
-	const renderArticles = Handlebars.compile(template);
+	const renderData = Handlebars.compile(template);
 
-	// Append the rendered results to the home page
-	$("#" + articleDivName).html(renderArticles(articles));
+	// Append the rendered results
+	if(divIdName && divIdName.length > 0) {
+		$("#" + divIdName).html(renderData(data));	
+	} else {
+		$("." + divClassName).html(renderData(data));	
+	}
+	
 }
 
 // Listener for scrape articles button
@@ -41,7 +46,7 @@ $("#scrape-btn").on("click", function(event) {
 	.then( articles => {
 
 		if(articles.articles.length > 0) {
-			renderArticles(articles, articlesTemplate, "articles-div");
+			renderData(articles, articlesTemplate, "articles-div");
 		} 
 
 		// Update modal body text
@@ -61,7 +66,7 @@ $(document).on("click", ".article-save-btn", function(event) {
 
 	$.post("/api/save/articles/" + articleId)
 	.then( saveResults => {
-		renderArticles(saveResults, articlesTemplate, "articles-div");
+		renderData(saveResults, articlesTemplate, "articles-div");
 	});
 });
 
