@@ -1,5 +1,7 @@
 # scraping (GizHeadlines)
 
+![GizHeadlines](public/assets/images/github/title.png)
+
 # What Is It?
 A web application that utilizes cheerio to scrape articles from Gizmodo.com.  Users can then choose articles they would like to save and then add notes to saved articles.
 
