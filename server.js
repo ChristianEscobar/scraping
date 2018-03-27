@@ -26,8 +26,11 @@ app.use(methodOverride("_method"));
 
 // Use mongoose Promises
 // Connect to the database
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/gizheadlines";
+
+// Connect to database
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/headlines-scraping");
+mongoose.connect(MONGODB_URI);
 
 // Set Handlebars.
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));

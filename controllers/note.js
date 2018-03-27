@@ -19,7 +19,6 @@ module.exports.getNotes = function(req, res) {
 	models.Save.findById({_id: req.params.id})
 	.populate("note")
 	.exec( function(error, articleWithNotes) {
-		console.log("==>", articleWithNotes);
 		res.json(articleWithNotes);
 	});
 }
